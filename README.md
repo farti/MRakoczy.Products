@@ -6,10 +6,12 @@
 * [Print screens](#print-screens)
 
 ## General info
+
 *  Simple Net Core 3.0 apliccation, which create Api to CRUD products.
 
 
 ## Technologies
+
 * C#  
 * Microsoft.EntityFrameworkCore
 * Microsoft.EntityFrameworkCore
@@ -18,9 +20,10 @@
 
 ## Configuration
 
+
 * Create empty MSSQL datbase and update ConnectionStrings in appsettings.json
   
-  ```javascript
+ ```json
 {
   "ConnectionStrings": {
     "Default": "server=DESKTOP-M\\SQLEXPRESS; database=Products; Integrated Security=SSPI"
@@ -35,12 +38,13 @@
   },
   "AllowedHosts": "*"
 }
-  ```
+```
 
 * Go to Package Manager Console and run Update-Database
 * Build and run app !
 
 ## Print screens
+
 
 
  
