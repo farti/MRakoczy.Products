@@ -7,7 +7,6 @@ using MRakoczy.Application.Persistence;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace MRakoczy.Application.Controllers
 {
@@ -29,10 +28,11 @@ namespace MRakoczy.Application.Controllers
         /// <returns>List of products</returns>
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> List()
+        public async Task<IActionResult> List()
         {
             var products =  await _context.Products.ToListAsync();
-            return _mapper.Map<List<Product>, List<ProductDto>>(products);
+
+            return Ok(_mapper.Map<List<Product>, List<ProductDto>>(products));
         }
 
         /// <summary>
@@ -42,51 +42,45 @@ namespace MRakoczy.Application.Controllers
         /// <returns>Product data</returns>
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProductById(int id)
+        public async Task<IActionResult> GetProductById(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.SingleOrDefaultAsync(p=>p.Id == id);
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            return product;
+            var productDto = _mapper.Map<Product, ProductDto>(product);
+            await _context.SaveChangesAsync();
+            
+            return Ok(productDto);
         }
         /// <summary>
         /// Update product data
         /// </summary>
         /// <param name="id">Id of the product</param>
-        /// <param name="product">Product object</param>
+        /// <param name="productDto">Product object</param>
         /// <returns>Update confirmation</returns>
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, Product product)
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDto productDto)
         {
-            if (id != product.Id)
-            {
-                return BadRequest();
-            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            _context.Entry(product).State = EntityState.Modified;
+            var product = await _context.Products.SingleOrDefaultAsync(p=>p.Id == id);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            if (product == null)
+                return NotFound();
 
-            return NoContent();
+            _mapper.Map<ProductDto, Product>(productDto, product);
+            
+            await _context.SaveChangesAsync();
+
+            var result = _mapper.Map<Product, ProductDto>(product);
+
+            return Ok(result);
         }
         /// <summary>
         /// Update product data
@@ -117,18 +111,19 @@ namespace MRakoczy.Application.Controllers
         /// <returns>Delete confirmation</returns>
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Product>> RemoveProduct(int id)
+        public async Task<IActionResult> RemoveProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
+            
             if (product == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
+            _context.Remove(product);
             await _context.SaveChangesAsync();
 
-            return product;
+            return Ok(id);
         }
 
         private bool ProductExists(int id)

@@ -11,8 +11,9 @@ namespace MRakoczy.Application.Mapping
             //Domain to API resource
             CreateMap<Product, ProductDto>();
 
-            //API Resource to Domaon
-            CreateMap<ProductDto, Product>();
+            //API Resource to Domain
+            CreateMap<ProductDto, Product>()
+                .ForMember(p=>p.Id, opt => opt.Ignore());
         }
     }
 }
