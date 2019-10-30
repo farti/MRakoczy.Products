@@ -5,8 +5,10 @@ using MRakoczy.Application.Persistence;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MRakoczy.Products.Interfaces;
 using MRakoczy.Products.Models.Domain;
 using MRakoczy.Products.Models.Dto;
+using MRakoczy.Products.Models.Persistence;
 
 namespace MRakoczy.Application.Controllers
 {
@@ -14,13 +16,16 @@ namespace MRakoczy.Application.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ProductsDbContext _context;
+        
         private readonly IMapper _mapper;
+        private readonly IProductRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProductsController(ProductsDbContext context, IMapper mapper)
+        public ProductsController( IMapper mapper, IProductRepository repository, IUnitOfWork unitOfWork)
         {
-            _context = context;
             _mapper = mapper;
+            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
         /// <summary>
         /// Display products list
@@ -30,7 +35,7 @@ namespace MRakoczy.Application.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var products =  await _context.Products.ToListAsync();
+            var products = await _repository.List();
 
             return Ok(_mapper.Map<List<Product>, List<ProductDto>>(products));
         }
@@ -44,7 +49,7 @@ namespace MRakoczy.Application.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id)
         {
-            var product = await _context.Products.SingleOrDefaultAsync(p=>p.Id == id);
+            var product = await _repository.GetProductById(id);
 
             if (product == null)
             {
@@ -52,7 +57,7 @@ namespace MRakoczy.Application.Controllers
             }
 
             var productDto = _mapper.Map<Product, ProductDto>(product);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.CompleteAsync();
             
             return Ok(productDto);
         }
@@ -69,14 +74,14 @@ namespace MRakoczy.Application.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var product = await _context.Products.SingleOrDefaultAsync(p=>p.Id == id);
+            var product = await _repository.GetProductById(id);
 
             if (product == null)
                 return NotFound();
 
             _mapper.Map<ProductDto, Product>(productDto, product);
             
-            await _context.SaveChangesAsync();
+            await _unitOfWork.CompleteAsync();
 
             var result = _mapper.Map<Product, ProductDto>(product);
 
@@ -96,8 +101,9 @@ namespace MRakoczy.Application.Controllers
                 return BadRequest(ModelState);
 
             var product = _mapper.Map<ProductDto, Product>(productDto);
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
+            _repository.AddProduct(product);
+
+            await _unitOfWork.CompleteAsync();
 
             var result = _mapper.Map<Product, ProductDto>(product);
 
@@ -113,22 +119,17 @@ namespace MRakoczy.Application.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _repository.GetProductById(id);
             
             if (product == null)
             {
                 return NotFound();
             }
 
-            _context.Remove(product);
-            await _context.SaveChangesAsync();
+            _repository.RemoveProduct(product);
+            await _unitOfWork.CompleteAsync();
 
             return Ok(id);
-        }
-
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(e => e.Id == id);
         }
     }
 }

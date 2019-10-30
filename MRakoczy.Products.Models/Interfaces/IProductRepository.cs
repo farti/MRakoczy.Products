@@ -11,6 +11,6 @@ namespace MRakoczy.Products.Interfaces
         Task<Product> GetProductById(int id);
         void AddProduct(Product product);
         void RemoveProduct(Product product);
-        Task List();
+        Task<List<Product>> List();
     }
 }

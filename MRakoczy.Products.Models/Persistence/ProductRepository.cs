@@ -34,7 +34,7 @@ namespace MRakoczy.Products.Models.Persistence
             _context.Remove(product);
         }
 
-        public Task List()
+        public Task<List<Product>> List()
         {
             return _context.Products.ToListAsync();
         }
