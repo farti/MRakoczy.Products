@@ -17,4 +17,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MRakoczy.Products.Models\MRakoczy.Products.Models.csproj" />
+  </ItemGroup>
+
 </Project>

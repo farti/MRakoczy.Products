@@ -1,4 +1,4 @@
-﻿namespace MRakoczy.Application.Controllers.Resources
+﻿namespace MRakoczy.Products.Models.Dto
 {
     public class ProductDto
     {

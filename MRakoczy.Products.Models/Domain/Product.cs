@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MRakoczy.Application.Models
+namespace MRakoczy.Products.Models.Domain
 {
     [Table("Products")]
     public class Product

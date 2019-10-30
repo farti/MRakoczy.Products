@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MRakoczy.Application.Controllers.Resources;
-using MRakoczy.Application.Models;
 using MRakoczy.Application.Persistence;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MRakoczy.Products.Models.Domain;
+using MRakoczy.Products.Models.Dto;
 
 namespace MRakoczy.Application.Controllers
 {

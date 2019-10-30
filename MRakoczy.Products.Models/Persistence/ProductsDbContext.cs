@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MRakoczy.Application.Models;
+using MRakoczy.Products.Models.Domain;
 
 namespace MRakoczy.Application.Persistence
 {
