@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace MRakoczy.Products
+namespace MRakoczy.Application
 {
     public class Program
     {
