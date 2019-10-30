@@ -8,7 +8,7 @@ namespace MRakoczy.Products.Interfaces
 {
     public interface IProductRepository
     {
-        Task<Product> GetProductById(Product product);
+        Task<Product> GetProductById(int id);
         void AddProduct(Product product);
         void RemoveProduct(Product product);
         Task<List<Product>> List();

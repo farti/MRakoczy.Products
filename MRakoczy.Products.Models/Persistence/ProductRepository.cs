@@ -18,9 +18,9 @@ namespace MRakoczy.Products.Models.Persistence
             _context = context;
         }
 
-        public async Task<Product> GetProductById(Product product)
+        public async Task<Product> GetProductById(int id)
         {
-            return await _context.Products.SingleOrDefaultAsync(p => p.Id == product.Id);
+            return await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
 
         }
 
