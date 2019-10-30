@@ -20,7 +20,7 @@
 
 * Create empty MSSQL datbase and update ConnectionStrings in appsettings.json
   
-  ```json
+  ```javascript
 {
   "ConnectionStrings": {
     "Default": "server=DESKTOP-M\\SQLEXPRESS; database=Products; Integrated Security=SSPI"
