@@ -45,8 +45,8 @@
 
 ## Postman
 
-
-[Postman CRUD](../master/MRakoczy.Products/Postman/Product.postman_collection.json)
+[Postman documentation](https://documenter.getpostman.com/view/6481934/SW12ycHT?version=latest)
+[Postman json](../master/MRakoczy.Products/Postman/Product.postman_collection.json)
 
 
 
