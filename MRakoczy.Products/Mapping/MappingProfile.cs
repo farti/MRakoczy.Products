@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using MRakoczy.Products.Models.Domain;
-using MRakoczy.Products.Models.Dto;
+using MRakoczy.Application.Models.Domain;
+using MRakoczy.Application.Models.Dto;
 
 namespace MRakoczy.Application.Mapping
 {

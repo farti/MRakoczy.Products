@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using MRakoczy.Application.Interfaces;
 using MRakoczy.Application.Persistence;
-using MRakoczy.Products.Interfaces;
-using MRakoczy.Products.Models.Persistence;
 
 namespace MRakoczy.Application
 {

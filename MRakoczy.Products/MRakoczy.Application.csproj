@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MRakoczy.Products.Models\MRakoczy.Products.Models.csproj" />
+    <Folder Include="Postman\" />
   </ItemGroup>
 
 </Project>

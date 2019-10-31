@@ -1,15 +1,11 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MRakoczy.Application.Persistence;
+using MRakoczy.Application.Interfaces;
+using MRakoczy.Application.Models.Domain;
+using MRakoczy.Application.Models.Dto;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using MRakoczy.Products.Interfaces;
-using MRakoczy.Products.Models.Domain;
-using MRakoczy.Products.Models.Dto;
-using MRakoczy.Products.Models.Persistence;
 
 namespace MRakoczy.Application.Controllers
 {
