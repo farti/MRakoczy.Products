@@ -46,7 +46,7 @@
 ## Postman
 
 
-[Postman CRUD](../blob/master/MRakoczy.Products/Postman/Product.postman_collection.json)
+[Postman CRUD](../master/MRakoczy.Products/Postman/Product.postman_collection.json)
 
 
 
