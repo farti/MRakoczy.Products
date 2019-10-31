@@ -3,7 +3,7 @@
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Configuration](#configuration)
-* [Print screens](#print-screens)
+* [Postman](#postman)
 
 ## General info
 
@@ -43,7 +43,10 @@
 * Go to Package Manager Console and run Update-Database
 * Build and run app !
 
-## Print screens
+## Postman
+
+
+[Postman CRUD](../blob/master/MRakoczy.Products/Postman/Product.postman_collection.json)
 
 
 
