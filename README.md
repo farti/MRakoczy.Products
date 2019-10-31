@@ -7,13 +7,13 @@
 
 ## General info
 
-*  Simple Net Core 3.0 apliccation, which create Api to CRUD products.
+*  Simple .Net Core 3.0 apliccation, which create Api to CRUD products.
 
 
 ## Technologies
 
 * C#  
-* Microsoft.EntityFrameworkCore
+* .Net Core 3.0
 * Microsoft.EntityFrameworkCore
 * AutoMapper
 
