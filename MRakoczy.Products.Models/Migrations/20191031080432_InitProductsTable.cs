@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MRakoczy.Application.Migrations
+namespace MRakoczy.Products.Models.Migrations
 {
-    public partial class InitAddProducts : Migration
+    public partial class InitProductsTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,9 +11,8 @@ namespace MRakoczy.Application.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "varchar(200)", nullable: false),
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "newid()"),
+                    Name = table.Column<string>(type: "varchar(100)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>

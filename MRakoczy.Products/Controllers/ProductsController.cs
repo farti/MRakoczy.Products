@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MRakoczy.Application.Persistence;
@@ -47,7 +48,7 @@ namespace MRakoczy.Application.Controllers
         /// <returns>Product data</returns>
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductById(int id)
+        public async Task<IActionResult> GetProductById(Guid id)
         {
             var product = await _repository.GetProductById(id);
 
@@ -69,7 +70,7 @@ namespace MRakoczy.Application.Controllers
         /// <returns>Update confirmation</returns>
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDto productDto)
+        public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] ProductDto productDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -107,7 +108,7 @@ namespace MRakoczy.Application.Controllers
 
             var result = _mapper.Map<Product, ProductDto>(product);
 
-            return Ok(result);
+            return Ok(result.Id);
         }
 
         /// <summary>
@@ -117,7 +118,7 @@ namespace MRakoczy.Application.Controllers
         /// <returns>Delete confirmation</returns>
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> RemoveProduct(int id)
+        public async Task<IActionResult> RemoveProduct(Guid id)
         {
             var product = await _repository.GetProductById(id);
             

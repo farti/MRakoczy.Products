@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MRakoczy.Application.Migrations
+namespace MRakoczy.Products.Models.Migrations
 {
     public partial class SeedProducts : Migration
     {

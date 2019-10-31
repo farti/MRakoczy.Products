@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MRakoczy.Products.Models.Domain
@@ -6,7 +7,8 @@ namespace MRakoczy.Products.Models.Domain
     [Table("Products")]
     public class Product
     {
-        public int Id { get; set; }
+        [Key]
+        public Guid Id { get; set; }
 
         [Required]
         [Column(TypeName = "varchar(100)")]
